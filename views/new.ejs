@@ -1,6 +1,11 @@
+<%- include ("partials/header")%>
+<title>New</title>
+</head>
+<body>
 <h1>Create a new Campgrounds</h1>
 <form action="/campgrounds" method="post">
     <input type="text" name="name">
-    <input type="text" name="places">
+    <input type="text" name="place">
     <button type="submit">Submit</button>
 </form>
+<%- include ("partials/footer")%>

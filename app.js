@@ -1,29 +1,59 @@
-var express=require("express");
-var app=express();
-var bodyParser=require("body-parser");
+var express = require("express");
+var app = express();
+var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
 
-app.use(bodyParser.urlencoded({extended: true}));
+mongoose.connect("mongodb://localhost:27017/yelp_camp",{useNewUrlParser: true,useUnifiedTopology: true});
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.listen(3000, function(){
-    console.log("YelpCamp Online");
+//SCHEMA
+var campgroundSchema = new mongoose.Schema({
+  name: String,
+  imageURL: String
 });
 
-app.get("/",function(req,res){
-    res.render("./landing.ejs");
-})
+//Model
+var campground = mongoose.model("Campground", campgroundSchema);
 
-app.get("/campgrounds",function(req,res){
-    res.render("./camps.ejs")
-})
-app.post("/campgrounds",function(req,res){
-    res.send("You hit the postroute");
-    var name =req.body.name;
-    var place =req.body.place;
+app.listen(3000, function () {
+  console.log("YelpCamp Online");
+});
 
+app.get("/", function (req, res) {
+  res.render("./landing.ejs");
+});
 
-})
+app.get("/campgrounds", function (req, res) {
+  campground.find({}, function (err, campgrounds) {
+    if (err) {
+      console.log("******Squeusy thing******");
+    } else {
+      res.render("./camps.ejs", { campgrounds: campgrounds });
+    }
+  });
+});
+app.post("/campgrounds", function (req, res) {
+  res.render("./landing.ejs");
+  var name = req.body.name;
+  var place = req.body.place;
 
-app.get("/campgrounds/new",function(req,res){
-    res.render("new.ejs")
+  campground.create(
+    {
+      name: name,
+      imageURL: place
+    },
+    function (err, campground) {
+      if (err) {
+        console.log("********Error***********");
+        console.log(err);
+      } else {
+        console.log("********NewLy Created Something***********");
+        console.log(campground);
+      }
+    }
+  );
+});
 
-})
+app.get("/campgrounds/new", function (req, res) {
+  res.render("new.ejs");
+});
