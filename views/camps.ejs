@@ -3,14 +3,10 @@
 </head>
 <body>
     <ul>
-        <% for(var i=0;i!=2;i++) %>
-        <% { %>
-            <li>
-                <%- campgrounds[i].name %>
-                <br>
-                <%- campgrounds[i].imageURL %>
-            </li>
-        <% } %>
+        <% campgrounds.forEach(function(camp){ %>
+            <li><%= camp.name %> <br> <%= camp.imageURL %> <br><%= camp.description %></li>
+            <a href="campgrounds/<%= camp._id %>">Go to this camp</a>
+        <% }) %>
     </ul>
 
 <%- include ("partials/footer")%>
