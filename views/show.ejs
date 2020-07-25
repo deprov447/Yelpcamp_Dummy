@@ -1,0 +1,9 @@
+<h1><%= campp.name %></h1>
+<h2><%= campp.description %></h2>
+<% campp.comments.forEach(function(cmnt){ %>
+    <li>
+        <%= cmnt.text %> <br>
+        <b><%= cmnt.author %></b>
+    </li>
+<% }) %>
+ 
