@@ -1,0 +1,10 @@
+<h1><%= campp.name %></h1>
+<h2><%= campp.description %></h2>
+<% campp.comments.forEach(function(cmnt){ %>
+    <li>
+        <h2><%= cmnt.text %></h2>
+                --------<b><%= cmnt.author %></b>
+    </li>
+    <% }) %>
+    <a href="/campgrounds/<%= campp._id %>/comments/new">Add A Comment</a>
+ 

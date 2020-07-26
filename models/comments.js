@@ -1,10 +1,10 @@
-var mongoose=require("mongoose");
+var mongoose = require("mongoose");
 
-var commentSchema= mongoose.Schema({
-    text:String,
-    author: String
-})
+var commentSchema = mongoose.Schema({
+  text: String,
+  author: String,
+});
 
-comment=mongoose.model("comment",commentSchema);
+comment = mongoose.model("comment", commentSchema);
 
-module.exports=comment;
+module.exports = comment;
